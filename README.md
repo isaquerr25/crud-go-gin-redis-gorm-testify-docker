@@ -5,10 +5,8 @@ Configuration
 
 Make sure you have Docker and Docker Compose installed on your machine.
 
-    Clone the repository:
+Clone the repository:
     
-    bash
-
 ```sh
 git clone github.com/isaquerr25/crud-go-gin-redis-gorm-testify-docker
 ```
@@ -17,15 +15,11 @@ Create a .env file in the project root and configure the necessary environment v
 
 Start the containers using Docker Compose:
 
-bash
-
 ```sh
 docker-compose up -d
 ```
 
 Run the application:
-
-bash
 
 ```sh
     go run main.go
@@ -43,8 +37,6 @@ Tests
 
 Run the tests using the following command:
 
-bash
-
 ```sh
 go test
 ```
@@ -52,8 +44,6 @@ go test
 Cleanup
 
 To stop and remove the containers, run:
-
-bash
 
 ```sh
 docker-compose down
