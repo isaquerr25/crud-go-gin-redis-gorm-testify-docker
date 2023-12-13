@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: go_crud_example
+    ports:
+      - '5432:5432'
+
+  redis:
+    image: redis:latest
+    ports:
+      - '6379:6379'
