@@ -1,10 +1,4 @@
----
-runme:
-  id: 01HHJH6264GH9950T6R2E9CADT
-  version: v2.0
----
-
-CRUD in Go with GORM, Docker Compose, Redis, and PostgreSQL
+##CRUD in Go with GORM, Docker Compose, Redis, and PostgreSQL
 
 This is a simple example of a CRUD application in Go that uses GORM as the ORM, Docker Compose for container orchestration, and Redis and PostgreSQL as databases.
 Configuration
