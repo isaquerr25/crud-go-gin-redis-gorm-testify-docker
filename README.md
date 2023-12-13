@@ -1,20 +1,12 @@
----
-runme:
-  id: 01HHJH6264GH9950T6R2E9CADT
-  version: v2.0
----
-
-CRUD in Go with GORM, Docker Compose, Redis, and PostgreSQL
+# CRUD in Go with GORM,Testify ,Docker Compose, Redis, and PostgreSQL
 
 This is a simple example of a CRUD application in Go that uses GORM as the ORM, Docker Compose for container orchestration, and Redis and PostgreSQL as databases.
 Configuration
 
 Make sure you have Docker and Docker Compose installed on your machine.
 
-    Clone the repository:
+Clone the repository:
     
-    bash
-
 ```sh
 git clone github.com/isaquerr25/crud-go-gin-redis-gorm-testify-docker
 ```
@@ -23,15 +15,11 @@ Create a .env file in the project root and configure the necessary environment v
 
 Start the containers using Docker Compose:
 
-bash
-
 ```sh
 docker-compose up -d
 ```
 
 Run the application:
-
-bash
 
 ```sh
     go run main.go
@@ -49,8 +37,6 @@ Tests
 
 Run the tests using the following command:
 
-bash
-
 ```sh
 go test
 ```
@@ -58,8 +44,6 @@ go test
 Cleanup
 
 To stop and remove the containers, run:
-
-bash
 
 ```sh
 docker-compose down
