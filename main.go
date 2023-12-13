@@ -1,8 +1,11 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"net/http"
 	"os"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
@@ -39,8 +42,8 @@ func init() {
 	// Configuração do cache Redis
 	rdb = redis.NewClient(&redis.Options{
 		Addr:     "localhost:6379",
-		Password: "",
-		DB:       0,
+		Password: "", // sem senha
+		DB:       0,  // usar o banco de dados padrão
 	})
 }
 
@@ -70,14 +73,33 @@ func GetUsers(c *gin.Context) {
 }
 
 // GetUser busca um usuário pelo ID
+// GetUser busca um usuário pelo ID
 func GetUser(c *gin.Context) {
 	id := c.Params.ByName("id")
+
+	// Tentar obter o usuário do cache
+	cacheKey := fmt.Sprintf("user:%s", id)
+	cacheResult, err := rdb.Get(c.Request.Context(), cacheKey).Result()
+	if err == nil {
+		// Se o usuário estiver no cache, retornar diretamente do cache
+		var cachedUser User
+		if err := json.Unmarshal([]byte(cacheResult), &cachedUser); err == nil {
+			c.JSON(http.StatusOK, cachedUser)
+			return
+		}
+	}
+
+	// Se o usuário não estiver no cache, consultá-lo no banco de dados
 	var user User
 	if err := db.Where("id = ?", id).First(&user).Error; err != nil {
-		c.AbortWithStatus(404)
+		c.AbortWithStatus(http.StatusNotFound)
 		fmt.Println(err)
 	} else {
-		c.JSON(200, user)
+		// Armazenar o resultado no cache para futuras solicitações
+		userJSON, _ := json.Marshal(user)
+		rdb.Set(c.Request.Context(), cacheKey, userJSON, 24*time.Hour) // Cache válido por 24 horas
+
+		c.JSON(http.StatusOK, user)
 	}
 }
 
