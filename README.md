@@ -1,9 +1,3 @@
----
-runme:
-  id: 01HHMEVXQN9J74NRS7YV80H7MD
-  version: v2.0
----
-
 # CRUD in Go with GORM,Testify ,Docker Compose, Redis, and PostgreSQL
 
 This is a simple example of a CRUD application in Go that uses GORM as the ORM, Docker Compose for container orchestration, and Redis and PostgreSQL as databases.
